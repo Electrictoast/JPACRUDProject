@@ -171,17 +171,16 @@ Game ID: <input name="bgid">
 			<form action="chooseForm.do" method="GET">
 				<div class="row">
 					<div class="col-4 col-sm-12">
-						<input type="radio" id="radio-alpha" name="value" value="add"
-							checked="checked"> <label for="radio-beta">Add a
-							game</label>
+						<input type="radio" id="radio-add" name="value" value="add">
+						 <label for="radio-add">Add a game</label>
 					</div>
 					<div class="col-4 col-sm-12">
-						<input type="radio" id="radio-alpha" name="value" value="change">
-						<label for="radio-beta">Edit a game</label> ID: <input name="bgid">
+						<input type="radio" id="radio-change" name="value" value="change" checked="checked">
+						<label for="radio-change">Edit a game</label> ID: <input name="bgid">
 					</div>
 					<div class="col-4 col-sm-12">
-						<input type="radio" id="radio-alpha" name="value" value="delete">
-						<label for="radio-beta">Delete a game</label>
+						<input type="radio" id="radio-delete" name="value" value="delete">
+						<label for="radio-delete">Delete a game</label>
 					</div>
 				</div>
 			
@@ -190,32 +189,41 @@ Game ID: <input name="bgid">
 			
 			</form>
 			<c:if test="${value == 'add'}">
+			<div class="row">
 				<form action="add.do">
-					Title: <input name="title"><br> Rating: <input
-						name="averageRating"><br> Minimum number of players:
-					<input name="minPlayers"><br> Maximum number of
-					players: <input name="maxPlayers"><br> Minimum play
-					time: <input name="minPlaytime"><br> Maximum play
-					time: <input name="maxPlaytime"><br> Release year: <input
-						name="releaaseYear"><br> Age range: <input
-						name="ageRange"><br> <input type="submit" value="Add">
+					<div class="col-6">
+					Title: <input name="title"><br> 
+					Rating: <input name="averageRating"><br> 
+					Minimum number of players: <input name="minPlayers"><br> 
+					Maximum number of players: <input name="maxPlayers"><br> 
+					</div>
+					<div class="col-6">
+					Minimum play time: <input name="minPlaytime"><br> 
+					Maximum play time: <input name="maxPlaytime"><br> 
+					Release year: <input name="releaaseYear"><br> 
+					Age range: <input name="ageRange"><br> <input type="submit" value="Add">
+					</div>
 				</form>
+				</div>
 			</c:if>
 			<c:if test="${value == 'change' }">
+			<div class="row">
 				<form action="change.do">
-					Title: <input name="title" value=${boardgame.title }><br>
-					Rating: <input name="averageRating"
-						value=${boardgame.averageRating }><br> Minimum number
-					of players: <input name="minPlayers" value=${boardgame.minPlayers }><br>
-					Maximum number of players: <input name="maxPlayers"
-						value=${boardgame.maxPlayers }><br> Minimum play
-					time: <input name="minPlaytime" value=${boardgame.minPlaytime }><br>
-					Maximum play time: <input name="maxPlaytime"
-						value=${boardgame.maxPlaytime }><br> Release year: <input
-						name="releaaseYear" value=${boardgame.releaseYear }><br>
-					Age range: <input name="ageRange" value=${boardgame.ageRating }><br>
+					<div class="col-6">
+					Title: <input name="title" value="${boardgame.title }"><br>
+					Rating: <input name="averageRating" value="${boardgame.averageRating }"><br> 
+					Minimum number of players: <input name="minPlayers" value="${boardgame.minPlayers }"><br>
+					Maximum number of players: <input name="maxPlayers" value="${boardgame.maxPlayers }"><br> 
+					</div>
+					<div class="col-6">
+					Minimum play time: <input name="minPlaytime" value="${boardgame.minPlaytime }"><br>
+					Maximum play time: <input name="maxPlaytime" value="${boardgame.maxPlaytime }"><br> 
+					Release year: <input name="releaaseYear" value="${boardgame.releaseYear }"><br>
+					Age range: <input name="ageRange" value="${boardgame.ageRange }"><br>
 					<input type="submit" value="Add">
+					</div>
 				</form>
+				</div>
 
 			</c:if>
 			<c:if test="${value == 'delete' }">
@@ -231,10 +239,8 @@ Game ID: <input name="bgid">
 	<section class="wrapper">
 		<div class="inner">
 			<header class="special">
-				<h2>Faucibus consequat lorem</h2>
-				<p>In arcu accumsan arcu adipiscing accumsan orci ac. Felis id
-					enim aliquet. Accumsan ac integer lobortis commodo ornare aliquet
-					accumsan erat tempus amet porttitor.</p>
+				<h2>Recent reviews</h2>
+				<p>Listen to what people are saying about the latest games</p>
 			</header>
 			<div class="testimonials">
 				<section>
