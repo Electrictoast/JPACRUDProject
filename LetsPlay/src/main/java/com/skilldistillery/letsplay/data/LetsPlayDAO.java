@@ -11,6 +11,9 @@ public interface LetsPlayDAO {
 	public List<Boardgame> findAll();
 	public List<Boardgame> findByKeyword(String keyword);
 	public List<Boardgame> findByNumPlayers(int num);
+	public Boardgame create(Boardgame boardgame);
+	public void delete(Integer id);
+	public Boardgame change(Boardgame boardgame, Integer bgid);
 	
 
 }
