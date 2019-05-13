@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%-- <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,7 @@
 
 <html>
 <head>
-<title>Generic Page - Industrious by TEMPLATED</title>
+<title>${boardgame.title }</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -43,7 +44,7 @@
 
 	<!-- Header -->
 	<header id="header">
-		<a class="logo" href="/WEB-INF/index.jsp">Industrious</a>
+		<a class="logo" href="/">Lets Play</a>
 		<nav>
 			<a href="#menu">Menu</a>
 		</nav>
@@ -52,9 +53,8 @@
 	<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-			<li><a href="/WEB-INF/index.jsp">Home</a></li>
-			<li><a href="elements.html">Elements</a></li>
-			<li><a href="generic.html">Generic</a></li>
+			<li><a href="/">Home</a></li>
+
 		</ul>
 	</nav>
 
@@ -71,23 +71,37 @@
 					<h2>About the game</h2>
 				</header>
 				<ul style="">
-					<li><strong>Rating</strong>${boardgame.averageRating }</li>
+					<li><strong>Rating:</strong> ${boardgame.averageRating }</li>
 					<li><strong>Number of players:</strong> ${boardgame.minPlayers }-${boardgame.maxPlayers }</li>
 					<li><strong>Play time:</strong> ${boardgame.minPlaytime }-${boardgame.maxPlaytime }</li>
 					<li><strong>Release year:</strong> ${boardgame.releaseYear }</li>
 					<li><strong>Age Range:</strong> ${boardgame.ageRange }</li>
 				</ul>
 				<hr />
-					<!--links to images/ tutorials/ more content  -->
+				<!--links to images/ tutorials/ more content  -->
 
+			<div class="row">
+				<div class="col-6">
+					<form action="chooseForm.do" method="get">
+						<input type="hidden" name="value" value="change">
+						<input type="hidden" name="bgid" value="${boardgame.id }">
+						<input type="submit" value="Change">
+					</form>
+				</div>
+				<div class="col-6">
+					<form action="delete.do?bgid=${boardgame.id }" method="post">
+						<input type="submit" value="Delete">
+					</form>
+				</div>
+			</div>
 			</div>
 		</div>
 	</section>
 
 	<!-- Footer -->
-	<footer id="footer">
+	<!-- <footer id="footer">
 		<div class="inner">
-			<!-- <div class="content">
+			<div class="content">
 				<section>
 					<h3>Accumsan montes viverra</h3>
 					<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing
@@ -117,13 +131,13 @@
 						<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
 					</ul>
 				</section>
-			</div>-->
+			</div>
 			<div class="copyright">
 				&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>,
 				Video <a href="https://coverr.co">Coverr</a>.
 			</div>
 		</div>
-	</footer>
+	</footer>-->
 
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>

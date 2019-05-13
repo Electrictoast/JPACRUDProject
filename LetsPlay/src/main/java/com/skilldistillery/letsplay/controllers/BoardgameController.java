@@ -43,6 +43,15 @@ public class BoardgameController {
 		mv.setViewName("WEB-INF/search.jsp");
 		return mv;
 	}
+	@RequestMapping(path="getGameByNumPlayers.do", method = RequestMethod.GET)
+	public ModelAndView getBoardgameByNumPlayers(@RequestParam("numPlayers") Integer numPlayers) {
+		ModelAndView mv = new ModelAndView();
+		List<Boardgame> list = letsPlayDAO.findByNumPlayers(numPlayers);
+		mv.addObject("numPlayers", numPlayers);
+		mv.addObject("list", list);
+		mv.setViewName("WEB-INF/search.jsp");
+		return mv;
+	}
 	
 	@RequestMapping(path="browse.do", method = RequestMethod.GET)
 	public ModelAndView browseGames() {
@@ -65,10 +74,10 @@ public class BoardgameController {
 			model.addAttribute("value", "delete");
 			return "WEB-INF/index.jsp";
 		}
-		return "WEB-INF/index.jsp#modify";
+		return null;
 	}
 	
-	@RequestMapping(path="add.do", method = RequestMethod.GET)
+	@RequestMapping(path="add.do", method = RequestMethod.POST)
 	public ModelAndView addGame(Boardgame boardgame) {
 		ModelAndView mv = new ModelAndView();
 		letsPlayDAO.create(boardgame);
@@ -77,7 +86,7 @@ public class BoardgameController {
 		mv.setViewName("WEB-INF/result.jsp");
 		return mv;
 	}
-	@RequestMapping(path="change.do", method = RequestMethod.GET)
+	@RequestMapping(path="change.do", method = RequestMethod.POST)
 	public ModelAndView changeGame(Boardgame boardgame) {
 		ModelAndView mv = new ModelAndView();
 		letsPlayDAO.change(boardgame, boardgame.getId());
@@ -86,7 +95,7 @@ public class BoardgameController {
 		mv.setViewName("WEB-INF/result.jsp");
 		return mv;
 	}
-	@RequestMapping(path="delete.do", method = RequestMethod.GET)
+	@RequestMapping(path="delete.do", method = RequestMethod.POST)
 	public ModelAndView deleteGame(Integer bgid) {
 		ModelAndView mv = new ModelAndView();
 		letsPlayDAO.delete(bgid);

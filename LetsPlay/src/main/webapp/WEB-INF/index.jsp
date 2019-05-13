@@ -80,7 +80,7 @@ Game ID: <input name="bgid">
 
 	<!-- Header -->
 	<header id="header">
-		<a class="logo" href="index.jsp">Lets Play</a>
+		<a class="logo" href="/">Lets Play</a>
 		<nav>
 			<a href="#menu">Menu</a>
 		</nav>
@@ -89,20 +89,22 @@ Game ID: <input name="bgid">
 	<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-			<li><a href="/WEB-INF/index.jsp">Home</a></li>
-			<li><a href="elements.html">Elements</a></li>
-			<li><a href="generic.html">Generic</a></li>
+			<li><a href="/">Home</a></li>
+
 		</ul>
 	</nav>
 
 	<!-- Banner -->
 	<section id="banner">
 		<div class="inner">
-			<h1>Lets Play</h1>
+			<h1>
+				<strong>Lets Play</strong>
+			</h1>
 			<h3>Board games for bored gamers</h3>
 			<c:if test="${not empty message }">
 				<h2>${message }</h2>
 			</c:if>
+			<br>
 			<p>
 
 				A Board game Database site with full CRUD<br /> designed by <a
@@ -124,12 +126,12 @@ Game ID: <input name="bgid">
 					<div class="content">
 						<header>
 							<a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
-							<h3>Search by id</h3>
+							<h3>Search by number of players</h3>
 						</header>
 						<p>
-						<form action="getGameById.do" method="GET">
-							Boardgame ID: <input type="text" name="bgid" /><br> <input
-								type="submit" value="Show Game" />
+						<form action="getGameByNumPlayers.do" method="GET">
+							Number of Players: <input type="text" name="numPlayers" /><br> <input
+								type="submit" value="Search" />
 						</form>
 						</p>
 
@@ -144,7 +146,7 @@ Game ID: <input name="bgid">
 						<p>
 						<form action="getGameByKeyword.do" method="GET">
 							Boardgame Search: <input type="text" name="keyword" /><br>
-							<input type="submit" value="Find" />
+							<input type="submit" value="Search" />
 						</form>
 						</p>
 					</div>
@@ -162,74 +164,91 @@ Game ID: <input name="bgid">
 		</div>
 	</section>
 
-	<!-- CTA -->
+	<!-- Modify -->
 	<section id="cta" class="wrapper">
 		<div class="inner">
-		
-		<h2>Modify</h2>
-		
+
+			<h2>Modify</h2>
+
 			<form action="chooseForm.do" method="GET">
 				<div class="row">
 					<div class="col-4 col-sm-12">
 						<input type="radio" id="radio-add" name="value" value="add">
-						 <label for="radio-add">Add a game</label>
+						<label for="radio-add">Add a game</label>
 					</div>
 					<div class="col-4 col-sm-12">
-						<input type="radio" id="radio-change" name="value" value="change" checked="checked">
-						<label for="radio-change">Edit a game</label> ID: <input name="bgid">
+						<input type="radio" id="radio-change" name="value" value="change"
+							checked="checked"> <label for="radio-change">Edit
+							a game</label> ID: <input type="text" name="bgid">
 					</div>
 					<div class="col-4 col-sm-12">
 						<input type="radio" id="radio-delete" name="value" value="delete">
 						<label for="radio-delete">Delete a game</label>
 					</div>
 				</div>
-			
-						<input type="submit" value="Go">
-					
-			
+				<br> <input type="submit" value="Go">
+
+
 			</form>
 			<c:if test="${value == 'add'}">
-			<div class="row">
-				<form action="add.do">
-					<div class="col-6">
-					Title: <input name="title"><br> 
-					Rating: <input name="averageRating"><br> 
-					Minimum number of players: <input name="minPlayers"><br> 
-					Maximum number of players: <input name="maxPlayers"><br> 
+				<form action="add.do" method="post">
+					<div class="row">
+						<div class="col-6">
+							Title: <input type="text" name="title"><br> Rating:
+							<input type="text" name="averageRating"><br> Minimum
+							number of players: <input type="text" name="minPlayers"><br>
+							Maximum number of players: <input type="text" name="maxPlayers"><br>
+						</div>
+						<div class="col-6">
+							Minimum play time: <input type="text" name="minPlaytime"><br>
+							Maximum play time: <input type="text" name="maxPlaytime"><br>
+							Release year: <input type="text" name="releaaseYear"><br>
+							Age range: <input type="text" name="ageRange"><br>
+						</div>
 					</div>
-					<div class="col-6">
-					Minimum play time: <input name="minPlaytime"><br> 
-					Maximum play time: <input name="maxPlaytime"><br> 
-					Release year: <input name="releaaseYear"><br> 
-					Age range: <input name="ageRange"><br> <input type="submit" value="Add">
+					<div class="row">
+						<div class="col-12">
+							<input type="submit" value="Add">
+						</div>
 					</div>
 				</form>
-				</div>
 			</c:if>
 			<c:if test="${value == 'change' }">
-			<div class="row">
-				<form action="change.do">
-					<div class="col-6">
-					Title: <input name="title" value="${boardgame.title }"><br>
-					Rating: <input name="averageRating" value="${boardgame.averageRating }"><br> 
-					Minimum number of players: <input name="minPlayers" value="${boardgame.minPlayers }"><br>
-					Maximum number of players: <input name="maxPlayers" value="${boardgame.maxPlayers }"><br> 
+				<form action="change.do" method="post">
+				<input type="hidden" name="id" value="${boardgame.id }">
+					<div class="row">
+						<div class="col-6">
+							Title: <input type="text" name="title"
+								value="${boardgame.title }"><br> Rating: <input
+								type="text" name="averageRating"
+								value="${boardgame.averageRating }"><br> Minimum
+							number of players: <input type="text" name="minPlayers"
+								value="${boardgame.minPlayers }"><br> Maximum
+							number of players: <input type="text" name="maxPlayers"
+								value="${boardgame.maxPlayers }"><br>
+						</div>
+						<div class="col-6">
+							Minimum play time: <input type="text" name="minPlaytime"
+								value="${boardgame.minPlaytime }"><br> Maximum play
+							time: <input type="text" name="maxPlaytime"
+								value="${boardgame.maxPlaytime }"><br> Release
+							year: <input type="text" name="releaaseYear"
+								value="${boardgame.releaseYear }"><br> Age range: <input
+								type="text" name="ageRange" value="${boardgame.ageRange }"><br>
+						</div>
 					</div>
-					<div class="col-6">
-					Minimum play time: <input name="minPlaytime" value="${boardgame.minPlaytime }"><br>
-					Maximum play time: <input name="maxPlaytime" value="${boardgame.maxPlaytime }"><br> 
-					Release year: <input name="releaaseYear" value="${boardgame.releaseYear }"><br>
-					Age range: <input name="ageRange" value="${boardgame.ageRange }"><br>
-					<input type="submit" value="Add">
-					</div>
+						<div class="row">
+							<div class="col-12">
+								<input type="submit" value="Change">
+							</div>
+						</div>
 				</form>
-				</div>
 
 			</c:if>
 			<c:if test="${value == 'delete' }">
-				<form action="delete.do">
-					Game ID: <input name="bgid"> <input type="submit"
-						value="Delete">
+				<form action="delete.do" method="post">
+					Game ID: <input type="text" name="bgid"> <input
+						type="submit" value="Delete">
 				</form>
 			</c:if>
 		</div>
@@ -297,8 +316,8 @@ Game ID: <input name="bgid">
 			</div>
 		</div>
 	</section>
-
 	<!-- Footer -->
+	<!--
 	<footer id="footer">
 		<div class="inner">
 			<div class="content">
@@ -334,7 +353,7 @@ Game ID: <input name="bgid">
 			</div>
 
 		</div>
-	</footer>
+	</footer> -->
 
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
